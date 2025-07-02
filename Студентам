@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сторінка Студента | ФМФКН ВДПУ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+        @media (min-width: 768px) {
+            .sidebar {
+                transform: translateX(0) !important;
+            }
+            .sidebar-overlay {
+                display: none !important;
+            }
+        }
+        .tab-button.active {
+            @apply bg-blue-700 text-white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <div id="sidebar" class="sidebar fixed inset-y-0 left-0 w-64 bg-gray-800 text-white p-4 z-50 transform -translate-x-full md:translate-x-0 md:relative">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold text-blue-400">ФМФКН</h2>
+            <button id="closeSidebar" class="text-white md:hidden focus:outline-none">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">home</span>
+                        Головна
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-white bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">school</span>
+                        Студентам
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">person</span>
+                        Викладачам
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">admin_panel_settings</span>
+                        Адмін
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">apartment</span>
+                        Факультет
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">group</span>
+                        Кафедри
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">menu_book</span>
+                        Спеціальності
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">calendar_today</span>
+                        Розклад
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a href="#" class="flex items-center text-gray-300 hover:text-white hover:bg-gray-700 p-2 rounded-lg">
+                        <span class="material-icons mr-3">contacts</span>
+                        Контакти
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="sidebarOverlay" class="sidebar-overlay fixed inset-0 bg-black opacity-50 z-40 hidden md:hidden"></div>
+
+    <div class="md:ml-64 min-h-screen flex flex-col">
+        <header class="bg-blue-600 text-white p-4 shadow-md flex items-center justify-between md:justify-end">
+            <button id="openSidebar" class="text-white md:hidden focus:outline-none">
+                <span class="material-icons">menu</span>
+            </button>
+            <div class="flex items-center">
+                <img src="https://vspu.edu.ua/images/logo/logo.png" alt="Логотип ВДПУ" class="h-10 mr-4">
+                <h1 class="text-2xl font-bold hidden md:block">Факультет математики, фізики і комп'ютерних наук</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg shadow-sm">Вийти</a>
+                </div>
+        </header>
+
+        <main class="flex-grow p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">Привіт, Іване!</h2>
+                <div class="bg-blue-100 text-blue-800 text-lg font-semibold px-4 py-2 rounded-full">
+                    Група 201-МФК
+                </div>
+            </div>
+
+            <div class="flex border-b border-gray-300 mb-6">
+                <button class="tab-button active px-4 py-2 text-lg font-medium rounded-t-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors" data-tab="schedule">Розклад</button>
+                <button class="tab-button px-4 py-2 text-lg font-medium rounded-t-lg text-gray-700 hover:bg-gray-200 transition-colors" data-tab="materials">Матеріали</button>
+                <button class="tab-button px-4 py-2 text-lg font-medium rounded-t-lg text-gray-700 hover:bg-gray-200 transition-colors" data-tab="grades">Оцінки</button>
+                <button class="tab-button px-4 py-2 text-lg font-medium rounded-t-lg text-gray-700 hover:bg-gray-200 transition-colors" data-tab="assignments">Завдання</button>
+                <button class="tab-button px-4 py-2 text-lg font-medium rounded-t-lg text-gray-700 hover:bg-gray-200 transition-colors" data-tab="messages">Повідомлення</button>
+            </div>
+
+            <div id="schedule" class="tab-content bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Мій Розклад Занять</h3>
+
+                <div class="bg-blue-50 p-4 rounded-lg shadow-sm mb-6 border border-blue-200">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                        <span class="material-icons mr-2 text-blue-700">alarm</span>
+                        Розклад Дзвінків
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-base">
+                        <div class="flex items-center p-1">
+                            <span class="font-medium text-gray-700">1 пара:</span> <span class="ml-2 font-semibold">8:30 - 9:50</span>
+                        </div>
+                        <div class="flex items-center p-1">
+                            <span class="font-medium text-gray-700">2 пара:</span> <span class="ml-2 font-semibold">10:05 - 11:25</span>
+                        </div>
+                        <div class="flex items-center p-1">
+                            <span class="font-medium text-gray-700">3 пара:</span> <span class="ml-2 font-semibold">11:40 - 13:00</span>
+                        </div>
+                        <div class="flex items-center p-1">
+                            <span class="font-medium text-gray-700">4 пара:</span> <span class="ml-2 font-semibold">13:30 - 14:50</span>
+                        </div>
+                        <div class="flex items-center p-1">
+                            <span class="font-medium text-gray-700">5 пара:</span> <span class="ml-2 font-semibold">15:00 - 16:20</span>
+                        </div>
+                        <div class="flex items-center p-1">
+                            <span class="font-medium text-gray-700">6 пара:</span> <span class="ml-2 font-semibold">16:35 - 17:55</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">День</th>
+                                <th class="py-3 px-6 text-left">Час</th>
+                                <th class="py-3 px-6 text-left">Дисципліна</th>
+                                <th class="py-3 px-6 text-left">Викладач</th>
+                                <th class="py-3 px-6 text-left">Аудиторія</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700 text-sm font-light">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left whitespace-nowrap">Понеділок</td>
+                                <td class="py-3 px-6 text-left">9:00 - 10:20</td>
+                                <td class="py-3 px-6 text-left">Вища математика</td>
+                                <td class="py-3 px-6 text-left">Проф. Петренко О.В.</td>
+                                <td class="py-3 px-6 text-left">301</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left">Понеділок</td>
+                                <td class="py-3 px-6 text-left">10:30 - 11:50</td>
+                                <td class="py-3 px-6 text-left">Об'єктно-орієнтоване програмування</td>
+                                <td class="py-3 px-6 text-left">Доц. Сидоренко І.П.</td>
+                                <td class="py-3 px-6 text-left">415</td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                    <span class="material-icons mr-2">calendar_month</span>
+                    Синхронізувати з Google Calendar
+                </button>
+            </div>
+
+            <div id="materials" class="tab-content bg-white p-6 rounded-lg shadow-md hidden">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Навчальні Матеріали</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Алгебра. Лекції (PDF)</h4>
+                        <p class="text-gray-700 text-sm mb-3">Викладач: Проф. Коваленко В.С.</p>
+                        <a href="#" class="text-blue-600 hover:underline flex items-center">
+                            <span class="material-icons text-xl mr-2">picture_as_pdf</span>
+                            Завантажити
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Фізика. Практичні роботи (DOCX)</h4>
+                        <p class="text-gray-700 text-sm mb-3">Викладач: Доц. Мельник А.Д.</p>
+                        <a href="#" class="text-blue-600 hover:underline flex items-center">
+                            <span class="material-icons text-xl mr-2">description</span>
+                            Завантажити
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-200">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Веб-дизайн. Презентація (PPTX)</h4>
+                        <p class="text-gray-700 text-sm mb-3">Викладач: Ст. викл. Олійник З.Р.</p>
+                        <a href="#" class="text-blue-600 hover:underline flex items-center">
+                            <span class="material-icons text-xl mr-2">slideshow</span>
+                            Завантажити
+                        </a>
+                    </div>
+                    </div>
+            </div>
+
+            <div id="grades" class="tab-content bg-white p-6 rounded-lg shadow-md hidden">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Мої Оцінки та Залікова Книжка</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Дисципліна</th>
+                                <th class="py-3 px-6 text-left">Семестр</th>
+                                <th class="py-3 px-6 text-left">Викладач</th>
+                                <th class="py-3 px-6 text-left">Оцінка</th>
+                                <th class="py-3 px-6 text-left">Дата</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700 text-sm font-light">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left">Вища математика</td>
+                                <td class="py-3 px-6 text-left">1</td>
+                                <td class="py-3 px-6 text-left">Проф. Петренко О.В.</td>
+                                <td class="py-3 px-6 text-left font-bold text-green-600">Добре (4)</td>
+                                <td class="py-3 px-6 text-left">15.01.2025</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left">Об'єктно-орієнтоване програмування</td>
+                                <td class="py-3 px-6 text-left">1</td>
+                                <td class="py-3 px-6 text-left">Доц. Сидоренко І.П.</td>
+                                <td class="py-3 px-6 text-left font-bold text-green-600">Відмінно (5)</td>
+                                <td class="py-3 px-6 text-left">22.01.2025</td>
+                            </tr>
+                             <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-6 text-left">Основи кібербезпеки</td>
+                                <td class="py-3 px-6 text-left">1</td>
+                                <td class="py-3 px-6 text-left">Доц. Іваненко Г.Л.</td>
+                                <td class="py-3 px-6 text-left font-bold text-yellow-600">Задовільно (3)</td>
+                                <td class="py-3 px-6 text-left">18.01.2025</td>
+                            </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <button class="mt-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                    <span class="material-icons mr-2">download</span>
+                    Завантажити залікову книжку (PDF)
+                </button>
+            </div>
+
+            <div id="assignments" class="tab-content bg-white p-6 rounded-lg shadow-md hidden">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Мої Завдання та Лабораторні</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-200">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Лабораторна робота №3: "Бази даних"</h4>
+                        <p class="text-gray-700 text-sm mb-2">Дисципліна: Проектування баз даних</p>
+                        <p class="text-gray-700 text-sm mb-3">Термін здачі: <span class="font-bold text-red-600">30 червня 2025</span></p>
+                        <a href="#" class="text-blue-600 hover:underline flex items-center mb-2">
+                            <span class="material-icons text-xl mr-2">attach_file</span>
+                            Завантажити опис завдання
+                        </a>
+                        <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+                        <button class="mt-3 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                            <span class="material-icons mr-2">upload</span>
+                            Завантажити роботу
+                        </button>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg shadow-sm border border-green-200">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-2">Домашнє завдання: "Алгоритми сортування"</h4>
+                        <p class="text-gray-700 text-sm mb-2">Дисципліна: Структури даних і алгоритми</p>
+                        <p class="text-gray-700 text-sm mb-3">Термін здачі: <span class="font-bold text-gray-600">15 липня 2025</span></p>
+                        <a href="#" class="text-blue-600 hover:underline flex items-center mb-2">
+                            <span class="material-icons text-xl mr-2">attach_file</span>
+                            Завантажити опис завдання
+                        </a>
+                        <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+                        <button class="mt-3 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                            <span class="material-icons mr-2">upload</span>
+                            Завантажити роботу
+                        </button>
+                    </div>
+                    </div>
+            </div>
+
+            <div id="messages" class="tab-content bg-white p-6 rounded-lg shadow-md hidden">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Повідомлення від Викладачів</h3>
+                <div class="space-y-4">
+                    <div class="bg-yellow-50 p-4 rounded-lg shadow-sm border border-yellow-200">
+                        <p class="text-gray-700 font-semibold mb-1">Від: Проф. Петренко О.В. <span class="text-gray-500 text-sm ml-2">27 червня 2025, 14:30</span></p>
+                        <p class="text-gray-800">Шановні студенти, нагадую, що консультація з вищої математики перенесена на середу о 15:00.</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-200">
+                        <p class="text-gray-700 font-semibold mb-1">Від: Доц. Сидоренко І.П. <span class="text-gray-500 text-sm ml-2">26 червня 2025, 10:00</span></p>
+                        <p class="text-gray-800">Оновлено матеріали до лекції з ООП на Google Drive. Перевірте папку "Лекція 5".</p>
+                    </div>
+                    </div>
+                <button class="mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                    <span class="material-icons mr-2">add_comment</span>
+                    Написати нове повідомлення
+                </button>
+            </div>
+
+        </main>
+
+        <footer class="bg-gray-800 text-white p-6 mt-8">
+            <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
+                <p class="mb-4 md:mb-0">&copy; 2025 Факультет математики, фізики і комп'ютерних наук ВДПУ ім. М. Коцюбинського.</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-white">Політика конфіденційності</a>
+                    <span class="text-gray-500">|</span>
+                    <a href="#" class="text-gray-300 hover:text-white">Умови використання</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const openSidebarBtn = document.getElementById('openSidebar');
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        openSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+        });
+
+        closeSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        });
+
+        // Close sidebar on desktop resize if it's open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.add('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+
+        // Tabs functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Deactivate all buttons and hide all contents
+                tabButtons.forEach(btn => btn.classList.remove('active', 'bg-blue-700', 'text-white', 'bg-blue-600', 'hover:bg-blue-700'));
+                tabButtons.forEach(btn => btn.classList.add('text-gray-700', 'hover:bg-gray-200'));
+
+                tabContents.forEach(content => content.classList.add('hidden'));
+
+                // Activate clicked button and show corresponding content
+                button.classList.add('active', 'bg-blue-700', 'text-white');
+                button.classList.remove('text-gray-700', 'hover:bg-gray-200');
+
+                const targetTab = button.dataset.tab;
+                document.getElementById(targetTab).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
